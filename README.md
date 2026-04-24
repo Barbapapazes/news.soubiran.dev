@@ -1,42 +1,38 @@
-# my-vue-app
+# news.soubiran.dev
 
-This template should help get you started developing with Vue 3 in Vite.
+Displays the latest quick news from [Estéban](https://soubiran.dev)'s technology monitoring. Each of them has been processed using AI to extract the most relevant information and to provide a critical analysis, available in the Discord discussion, where you can come and share your thoughts on the topic.
 
-## Recommended IDE Setup
+A RSS feed is also available at `/feed.rss` for readers who prefer to consume news in their feed reader.
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Development
 
-## Recommended Browser Setup
-
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+```bash
 pnpm install
 ```
 
-### Compile and Hot-Reload for Development
+Copy `.env.example` to `.env`.
 
-```sh
-pnpm dev
+```txt
+DISCORD_GUILD_ID=your_discord_guild_id_here
+QUICK_NEWS_CF_ACCESS_CLIENT_ID=your_cloudflare_access_client_id_here
+QUICK_NEWS_CF_ACCESS_CLIENT_SECRET=your_cloudflare_access_client_secret_here
 ```
 
-### Type-Check, Compile and Minify for Production
+The app fetches Quick News articles from a Cloudflare Access-protected endpoint
+at build time and in development through the Vite plugin in
+`plugins/quick-news/`. Make sure the Access client credentials you provide can
+read the Quick News API.
 
-```sh
-pnpm build
+Run locally:
+
+```bash
+pnpm run dev
 ```
+
+## Sponsors
+
+<p align="center">
+  <a href="https://github.com/sponsors/barbapapazes">
+    <img src="https://cdn.jsdelivr.net/gh/barbapapazes/static/sponsors.svg" alt="Sponsors" />
+  </a>
+</p>
