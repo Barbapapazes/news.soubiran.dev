@@ -4,7 +4,7 @@ import { loadEnv } from 'vite'
 import { z } from 'zod'
 import { QUICK_NEWS_SOURCE_URL } from './constants'
 
-const quickNewsSchema: z.ZodType<QuickNews> = z.object({
+const quickNewsSchema = z.object({
   id: z.string(),
   title: z.string(),
   url: z.string(),
@@ -14,7 +14,7 @@ const quickNewsSchema: z.ZodType<QuickNews> = z.object({
   discord_thread_message_id: z.string().nullable(),
   filename: z.string(),
   discord_webhook_id: z.string(),
-  released_at: z.string().nullish().transform(value => value ?? undefined),
+  released_at: z.string(),
   created_at: z.string(),
   discord_message_url: z.string(),
 })
