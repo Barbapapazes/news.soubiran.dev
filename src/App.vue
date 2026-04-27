@@ -102,7 +102,7 @@ function trackQuickNewsClick(id: string) {
                 <h2 class="font-semibold">
                   {{ news.title }}
                 </h2>
-                <p v-if="news.summary" class="text-sm text-muted">
+                <p v-if="news.summary" class="text-sm">
                   {{ news.summary }}
                 </p>
               </div>
@@ -122,7 +122,7 @@ function trackQuickNewsClick(id: string) {
             <div class="flex flex-row items-center justify-end gap-2 md:self-center">
               <UButton
                 label="Read the article"
-                :to="`${news.url}?utm_source=news.soubiran.dev&utm_medium=referral&utm_campaign=news` "
+                :to="`${news.url}?utm_source=news.soubiran.dev&utm_medium=referral&utm_campaign=news`"
                 target="_blank"
                 rel="noopener noreferrer"
                 variant="link"
