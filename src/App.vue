@@ -223,11 +223,13 @@ function hasDiscordAccount(user: CurrentUser | undefined) {
     return false
   }
 
-  if (discordAccountFields.some(field => typeof user[field] === 'string' && user[field].length > 0)) {
+  if (discordAccountFields.some((field) => {
+    return isNonEmptyString(user[field])
+  })) {
     return true
   }
 
-  if (typeof user.discord === 'string' && user.discord.length > 0) {
+  if (isNonEmptyString(user.discord)) {
     return true
   }
 
@@ -236,6 +238,10 @@ function hasDiscordAccount(user: CurrentUser | undefined) {
   }
 
   return false
+}
+
+function isNonEmptyString(value: unknown): value is string {
+  return typeof value === 'string' && value.length > 0
 }
 
 async function submitSuggestion() {
