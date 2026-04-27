@@ -1,6 +1,7 @@
 export interface QuickNews {
   id: string
   title: string
+  summary: string
   url: string
   discord_channel_id: string
   discord_message_id: string
@@ -10,5 +11,6 @@ export interface QuickNews {
   discord_webhook_id: string
   released_at: string
   created_at: string
+  authors: string[]
   discord_message_url: string
 }
