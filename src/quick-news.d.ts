@@ -2,6 +2,7 @@ declare module 'virtual:quick-news' {
   export interface QuickNews {
     id: string
     title: string
+    summary: string
     url: string
     discord_channel_id: string
     discord_message_id: string
@@ -11,6 +12,7 @@ declare module 'virtual:quick-news' {
     discord_webhook_id: string
     released_at: string
     created_at: string
+    authors: string[]
     discord_message_url: string
   }
 

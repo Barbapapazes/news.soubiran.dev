@@ -94,14 +94,32 @@ function trackQuickNewsClick(id: string) {
             :key="news.id"
             class="relative"
             :ui="{
-              body: 'flex flex-col md:flex-row md:items-center md:justify-between gap-4',
+              body: 'flex flex-col gap-4 md:flex-row md:justify-between',
             }"
           >
-            <h2 class="font-semibold">
-              {{ news.title }}
-            </h2>
+            <div class="flex-1 space-y-3">
+              <div class="space-y-1">
+                <h2 class="font-semibold">
+                  {{ news.title }}
+                </h2>
+                <p v-if="news.summary" class="text-sm text-muted">
+                  {{ news.summary }}
+                </p>
+              </div>
 
-            <div class="flex flex-row items-center justify-end gap-2">
+              <div v-if="news.authors.length" class="flex flex-wrap gap-2">
+                <UBadge
+                  v-for="author in news.authors"
+                  :key="author"
+                  color="neutral"
+                  variant="subtle"
+                >
+                  {{ author }}
+                </UBadge>
+              </div>
+            </div>
+
+            <div class="flex flex-row items-center justify-end gap-2 md:self-center">
               <UButton
                 label="Read the article"
                 :to="`${news.url}?utm_source=news.soubiran.dev&utm_medium=referral&utm_campaign=news` "
