@@ -26,6 +26,13 @@ interface CurrentUser {
   [key: string]: unknown
 }
 
+const discordAccountFields = [
+  'discord_id',
+  'discordId',
+  'discord_username',
+  'discordUsername',
+] as const
+
 const currentPath = ref(getCurrentPath())
 const suggestionLink = ref('')
 const submissionSuccessMessage = ref('')
@@ -89,7 +96,7 @@ const { data: currentUser, asyncStatus: currentUserAsyncStatus } = useQuery({
     })
 
     if (!response.ok) {
-      throw new Error(`Current user request failed with status ${response.status}.`)
+      throw new Error(`Failed to fetch current user (status ${response.status}).`)
     }
 
     return await response.json()
@@ -136,7 +143,7 @@ const { mutateAsync: submitQuickNewsSuggestion, asyncStatus: submissionAsyncStat
     })
 
     if (!response.ok) {
-      throw new Error(`Quick news suggestion request failed with status ${response.status}.`)
+      throw new Error(`Failed to submit quick-news suggestion (status ${response.status}).`)
     }
   },
 })
@@ -216,19 +223,7 @@ function hasDiscordAccount(user: CurrentUser | undefined) {
     return false
   }
 
-  if (typeof user.discord_id === 'string' && user.discord_id.length > 0) {
-    return true
-  }
-
-  if (typeof user.discordId === 'string' && user.discordId.length > 0) {
-    return true
-  }
-
-  if (typeof user.discord_username === 'string' && user.discord_username.length > 0) {
-    return true
-  }
-
-  if (typeof user.discordUsername === 'string' && user.discordUsername.length > 0) {
+  if (discordAccountFields.some(field => typeof user[field] === 'string' && user[field].length > 0)) {
     return true
   }
 
