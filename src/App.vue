@@ -223,9 +223,7 @@ function hasDiscordAccount(user: CurrentUser | undefined) {
     return false
   }
 
-  if (discordAccountFields.some((field) => {
-    return isNonEmptyString(user[field])
-  })) {
+  if (discordAccountFields.some(field => isNonEmptyString(user[field]))) {
     return true
   }
 
@@ -325,9 +323,10 @@ onBeforeUnmount(() => {
                   v-model="suggestionLink"
                   type="url"
                   placeholder="https://example.com/article"
+                  aria-describedby="quick-news-link-help"
                   required
                 />
-                <p class="text-sm text-muted">
+                <p id="quick-news-link-help" class="text-sm text-muted">
                   Only the link is sent to the API.
                 </p>
               </div>
