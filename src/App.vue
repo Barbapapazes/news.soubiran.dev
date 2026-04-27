@@ -299,7 +299,7 @@ onBeforeUnmount(() => {
           <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div class="space-y-1">
               <h1 class="text-2xl font-semibold">
-                Suggest a quick-news
+                Suggest a quick news
               </h1>
               <p class="text-sm text-muted">
                 Share a link to suggest an article for the quick-news feed.
@@ -317,7 +317,7 @@ onBeforeUnmount(() => {
           <UCard>
             <form class="space-y-4" @submit.prevent="submitSuggestion">
               <div class="space-y-2">
-                <label class="text-sm font-medium" for="quick-news-link">Article link</label>
+                <label class="text-sm font-medium" for="quick-news-link">Article URL</label>
                 <UInput
                   id="quick-news-link"
                   v-model="suggestionLink"
@@ -384,7 +384,7 @@ onBeforeUnmount(() => {
                 Latest quick news
               </h1>
               <p class="text-sm text-muted">
-                Keep up with the latest curated articles and suggest the next one.
+                Keep up with the latest curated articles and submit your own suggestion.
               </p>
             </div>
 
