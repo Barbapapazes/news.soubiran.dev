@@ -7,6 +7,7 @@ import { QUICK_NEWS_SOURCE_URL } from './constants'
 const quickNewsSchema = z.object({
   id: z.string(),
   title: z.string(),
+  summary: z.string().default(''),
   url: z.string(),
   discord_channel_id: z.string(),
   discord_message_id: z.string(),
@@ -16,6 +17,7 @@ const quickNewsSchema = z.object({
   discord_webhook_id: z.string(),
   released_at: z.string(),
   created_at: z.string(),
+  authors: z.array(z.string()).default([]),
   discord_message_url: z.string(),
 })
 
