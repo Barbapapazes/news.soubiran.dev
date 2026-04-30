@@ -13,7 +13,7 @@ export function buildQuickNewsRss(articles: QuickNews[]): string {
     const guid = escapeXml(article.id)
     const pubDate = toArticleDate(article).toUTCString()
     const description = escapeXml([
-      'Quick News tracks articles I read and summarized with AI on Discord.',
+      article.summary,
       `Original article: ${article.url}`,
       article.discord_message_url ? `Discord summary: ${article.discord_message_url}` : '',
     ].filter(Boolean).join('\n'))
