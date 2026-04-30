@@ -28,6 +28,11 @@ export async function fetchQuickNews(mode: string): Promise<QuickNews[]> {
   const clientId = env.QUICK_NEWS_CF_ACCESS_CLIENT_ID
   const clientSecret = env.QUICK_NEWS_CF_ACCESS_CLIENT_SECRET
 
+  if (!clientId || !clientSecret) {
+    console.warn('Cloudflare Access credentials for Quick News are not set. Please set QUICK_NEWS_CF_ACCESS_CLIENT_ID and QUICK_NEWS_CF_ACCESS_CLIENT_SECRET in your environment variables.')
+    return []
+  }
+
   try {
     const response = await fetch(`${QUICK_NEWS_SOURCE_URL}/api/quick-news`, {
       headers: {
