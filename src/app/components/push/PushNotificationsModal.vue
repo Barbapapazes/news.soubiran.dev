@@ -1,7 +1,7 @@
 <script lang="ts">
 import { useQuery } from '@pinia/colada'
-import { getPushNotificationPreferences, getUser, postIsSubscribed } from '@/app/api'
-import { PUSH_NOTIFICATIONS_QUERY_KEYS } from '@/app/queries/push-notifications'
+import { getPushNotificationPreferences, getUser } from '@/app/api'
+import { isSubscribedQuery, PUSH_NOTIFICATIONS_QUERY_KEYS } from '@/app/queries/push-notifications'
 import { USER_QUERY_KEYS } from '@/app/queries/user'
 
 const pushNotificationsModal = tv({
@@ -43,22 +43,7 @@ const loading = computed(() => {
   return userState.value.status === 'pending' || preferencesState.value.status === 'pending'
 })
 
-const { data } = useQuery({
-  key: PUSH_NOTIFICATIONS_QUERY_KEYS.isSubscribed(),
-  query: async () => {
-    const registration = await navigator.serviceWorker.getRegistration()
-    if (!registration) {
-      return false
-    }
-
-    const subscription = await registration.pushManager.getSubscription()
-    if (!subscription) {
-      return false
-    }
-
-    return postIsSubscribed(subscription.endpoint)
-  },
-})
+const { data } = useQuery(isSubscribedQuery())
 const isSubscribed = computed(() => {
   if (data.value) {
     return data.value.isSubscribed

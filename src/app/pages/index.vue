@@ -1,10 +1,12 @@
 <script lang="ts" setup>
+import { useQuery } from '@pinia/colada'
 import prose from '@soubiran/ui/wrapper-classes'
 import quickNews from 'virtual:quick-news'
 import bell from '~icons/ph/bell'
 import newspaper from '~icons/ph/newspaper'
 import discord from '~icons/simple-icons/discord'
 import PushNotificationsModal from '@/app/components/push/PushNotificationsModal.vue'
+import { isSubscribedQuery } from '@/app/queries/push-notifications'
 
 const title = 'News'
 useHead({
@@ -29,6 +31,8 @@ function enableNotifications() {
     })
     .open()
 }
+
+const { data } = useQuery(isSubscribedQuery())
 </script>
 
 <template>
@@ -53,7 +57,19 @@ function enableNotifications() {
           <div class="flex flex-col gap-4 md:flex-row">
             <UButton label="Share News" to="/quick-news/create" :icon="newspaper" block />
             <UButton label="Join the Discord" href="https://discord.gg/q2ghCGUuFR" target="_blank" rel="noopener" :icon="discord" block />
-            <UButton :label="isPushNotificationsSupported ? 'Enable Notifications' : 'Notifications Not Supported'" :icon="bell" block :disabled="!isPushNotificationsSupported" @click="enableNotifications" />
+            <UButton
+              block
+              :label="
+                isPushNotificationsSupported
+                  ? data?.isSubscribed
+                    ? 'Manage Notifications'
+                    : 'Enable Notifications'
+                  : 'Notifications Not Supported'
+              "
+              :icon="bell"
+              :disabled="!isPushNotificationsSupported"
+              @click="enableNotifications"
+            />
           </div>
           <p>
             <!-- TODO: links -->
