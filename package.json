@@ -15,7 +15,7 @@
     "cf-typegen": "wrangler types src/server/worker-configuration.d.ts"
   },
   "dependencies": {
-    "@nuxt/ui": "^4.7.0",
+    "@nuxt/ui": "^4.7.1",
     "@pinia/colada": "^1.2.1",
     "@sentry/cloudflare": "^10.52.0",
     "@sentry/hono": "^10.52.0",
