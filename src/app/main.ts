@@ -8,6 +8,7 @@ import { routes } from 'vue-router/auto-routes'
 import App from './App.vue'
 import { setupSentry } from './sentry'
 import './register-sw'
+import './sync-subscription'
 import './style.css'
 
 const app = createApp(App)
