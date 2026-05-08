@@ -37,7 +37,7 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
       }"
     >
       <UForm :state="state" :schema="schema" class="space-y-4" @submit="onSubmit">
-        <UFormField label="News URL" name="url" :error="(error as any)?.data?.errors.url?.[0]">
+        <UFormField label="News URL" name="url" :error="(error as any)?.data?.errors?.url?.[0]">
           <UInput v-model="state.url" placeholder="https://example.com/news/123" class="w-full" required />
         </UFormField>
 
