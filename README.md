@@ -6,6 +6,8 @@ You can join us and **share your own** as well. The more news we share, the more
 
 An RSS feed is available at `/feed.rss` for readers who prefer to follow news in their feed reader. For coders who prefer a structured format, a JSON feed is also available at `/quick-news.json`.
 
+The app is installable as a PWA so push notifications can work on iOS as well.
+
 <!-- TODO: links -->
 Read the announcement post on [soubiran.dev](https://soubiran.dev) and the technical details on [infra.soubiran.dev](https://infra.soubiran.dev).
 
