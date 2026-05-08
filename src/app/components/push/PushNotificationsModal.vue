@@ -1,8 +1,7 @@
 <script lang="ts">
 import { useQuery } from '@pinia/colada'
-import { getUser } from '@/app/api'
 import { isSubscribedQuery, preferencesQuery } from '@/app/queries/push-notifications'
-import { USER_QUERY_KEYS, userQuery } from '@/app/queries/user'
+import { userQuery } from '@/app/queries/user'
 
 const pushNotificationsModal = tv({
   slots: {
