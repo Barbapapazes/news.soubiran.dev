@@ -31,10 +31,11 @@ const { mutate, error, isLoading } = useMutation({
   },
 })
 
+const notificationPermission = ref(Notification.permission)
 async function enableNotifications() {
-  const permission = Notification.permission === 'granted' ? 'granted' : await Notification.requestPermission()
+  notificationPermission.value = Notification.permission === 'granted' ? 'granted' : await Notification.requestPermission()
 
-  if (permission !== 'granted') {
+  if (notificationPermission.value !== 'granted') {
     return
   }
 
@@ -49,6 +50,8 @@ async function enableNotifications() {
   })
 }
 
+const isNotificationsDenied = computed(() => notificationPermission.value === 'denied')
+
 const ui = computed(() => pushNotificationsSubscriptionForm())
 </script>
 
@@ -60,6 +63,14 @@ const ui = computed(() => pushNotificationsSubscriptionForm())
       variant="subtle"
       title="Unable to enable notifications"
       description="Something went wrong while enabling notifications."
+    />
+
+    <UAlert
+      v-if="isNotificationsDenied"
+      color="warning"
+      variant="subtle"
+      title="Notifications Blocked"
+      description="You have blocked notifications for this site. Please enable them in your browser settings to receive updates."
     />
 
     <div :class="prose.join(' ')">
@@ -76,6 +87,7 @@ const ui = computed(() => pushNotificationsSubscriptionForm())
       label="Enable Notifications"
       block
       :loading="isLoading"
+      :disabled="isNotificationsDenied"
       @click="enableNotifications"
     />
   </div>
