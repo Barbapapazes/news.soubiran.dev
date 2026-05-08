@@ -1,33 +1,13 @@
 # news.soubiran.dev
 
-Displays the latest quick news from [Estéban](https://soubiran.dev)'s technology monitoring. Each of them has been processed using AI to extract the most relevant information and to provide a critical analysis, available in the Discord discussion, where you can come and share your thoughts on the topic.
+[News](https://news.soubiran.dev) is my **personal technology monitoring feed** to try to keep track of the accelerating pace of the tech world. All the news I find interesting and want to keep track of ends up here and on <a href="https://discord.gg/q2ghCGUuFR" target="_blank" rel="noopener">Discord</a> with a summary, bullet points and a critical analysis.
 
-A RSS feed is also available at `/feed.rss` for readers who prefer to consume news in their feed reader.
+You can join us and **share yours** as well The more we share news, the more we can learn from each other and stay up-to-date with the latest developments in the tech world.
 
-## Development
+A RSS feed is available at `/feed.rss` for readers who prefer to consume news in their feed reader. For coders who prefer to consume news in a structured format, a JSON feed is also available at `/quick-news.json`.
 
-```bash
-pnpm install
-```
-
-Copy `.env.example` to `.env`.
-
-```txt
-DISCORD_GUILD_ID=your_discord_guild_id_here
-QUICK_NEWS_CF_ACCESS_CLIENT_ID=your_cloudflare_access_client_id_here
-QUICK_NEWS_CF_ACCESS_CLIENT_SECRET=your_cloudflare_access_client_secret_here
-```
-
-The app fetches Quick News articles from a Cloudflare Access-protected endpoint
-at build time and in development through the Vite plugin in
-`plugins/quick-news/`. Make sure the Access client credentials you provide can
-read the Quick News API.
-
-Run locally:
-
-```bash
-pnpm run dev
-```
+<!-- TODO: links -->
+Read the announcement post on [soubiran.dev](https://soubiran.dev) and technical details on [infra.soubiran.dev](https://infra.soubiran.dev).
 
 ## Sponsors
 

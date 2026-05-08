@@ -9,7 +9,7 @@ export function buildQuickNewsRss(articles: QuickNews[]): string {
 
   const items = sortedArticles.map((article) => {
     const title = escapeXml(article.title)
-    const link = escapeXml(article.url)
+    const link = escapeXml(`${article.url}?utm_source=news.soubiran.dev&utm_medium=rss&utm_campaign=news`)
     const guid = escapeXml(article.id)
     const pubDate = toArticleDate(article).toUTCString()
     const description = escapeXml([

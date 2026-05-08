@@ -1,5 +1,10 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+@import "@soubiran/ui";
+
+@plugin "@tailwindcss/typography";
+
+@source "../../node_modules/@soubiran/ui";
 
 :root {
   --ui-primary: black;

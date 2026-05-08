@@ -2,6 +2,7 @@ import type { Plugin, ResolvedConfig } from 'vite'
 import { mkdir, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { QUICK_NEWS_FEED_PATH } from './constants'
+import { buildQuickNewsJson } from './json'
 import { fetchQuickNews } from './quick-news'
 import { buildQuickNewsRss } from './rss'
 
@@ -9,6 +10,7 @@ export function quickNews(): Plugin[] {
   return [
     virtualQuickNews(),
     rss(),
+    json(),
   ]
 }
 
@@ -63,6 +65,29 @@ function rss(): Plugin {
 
       await mkdir(outDir, { recursive: true })
       await writeFile(resolve(outDir, QUICK_NEWS_FEED_PATH), buildQuickNewsRss(articles), 'utf8')
+    },
+  }
+}
+
+function json(): Plugin {
+  let mode: string
+  let config: ResolvedConfig | undefined
+
+  return {
+    name: 'quick-news:json',
+    apply: 'build',
+    config(_, env) {
+      mode = env.mode
+    },
+    configResolved(resolvedConfig) {
+      config = resolvedConfig
+    },
+    async closeBundle() {
+      const outDir = resolve(config?.root as string, config?.build.outDir as string)
+      const articles = await fetchQuickNews(mode)
+
+      await mkdir(outDir, { recursive: true })
+      await writeFile(resolve(outDir, 'quick-news.json'), buildQuickNewsJson(articles), 'utf8')
     },
   }
 }

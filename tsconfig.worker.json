@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.node.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.worker.tsbuildinfo",
+    "paths": {
+      "@/shared/*": ["./src/shared/*"],
+      "@/server/*": ["./src/server/*"]
+    },
+    "types": [
+      "./src/server/worker-configuration.d.ts"
+    ]
+  },
+  "include": [
+    "src/shared/**/*.ts",
+    "src/server/**/*.ts"
+  ]
+}

@@ -1,4 +1,4 @@
-import type { QuickNewsArticle } from './types'
+import type { QuickNews } from './types'
 
 export function escapeXml(value: string): string {
   return value
@@ -9,7 +9,7 @@ export function escapeXml(value: string): string {
     .replaceAll('\'', '&apos;')
 }
 
-export function toArticleDate(article: QuickNewsArticle): Date {
+export function toArticleDate(article: QuickNews): Date {
   const releasedAt = article.released_at
     ? new Date(`${article.released_at}T00:00:00.000Z`)
     : null

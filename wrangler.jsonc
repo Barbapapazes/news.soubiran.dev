@@ -1,13 +1,31 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "news-soubiran-dev",
+  "main": "src/server/index.ts",
   "compatibility_date": "2026-04-24",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
   "workers_dev": false,
   "preview_urls": false,
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": [
+      "/api/*"
+    ]
+  },
+  "services": [
+    {
+      "binding": "QUICK_NEWS",
+      "service": "quick-news-soubiran-dev"
+    }
+  ],
   "routes": [
     {
       "custom_domain": true,
-      "pattern": "news.soubiran.dev"
+      "pattern": "news.soubiran.dev",
+      "zone_name": "soubiran.dev"
     }
   ]
 }
