@@ -1,13 +1,13 @@
 # news.soubiran.dev
 
-[News](https://news.soubiran.dev) is my **personal technology monitoring feed** to try to keep track of the accelerating pace of the tech world. All the news I find interesting and want to keep track of ends up here and on <a href="https://discord.gg/q2ghCGUuFR" target="_blank" rel="noopener">Discord</a> with a summary, bullet points and a critical analysis.
+[News](https://news.soubiran.dev) is my **personal technology monitoring feed**, a way to keep up with the accelerating pace of the tech world. Everything I find interesting and want to track ends up here and on <a href="https://discord.gg/q2ghCGUuFR" target="_blank" rel="noopener">Discord</a>, with a summary, key bullet points, and a critical analysis.
 
-You can join us and **share yours** as well The more we share news, the more we can learn from each other and stay up-to-date with the latest developments in the tech world.
+You can join us and **share your own** as well. The more news we share, the more we can learn from one another and stay up to date with the latest developments in tech.
 
-A RSS feed is available at `/feed.rss` for readers who prefer to consume news in their feed reader. For coders who prefer to consume news in a structured format, a JSON feed is also available at `/quick-news.json`.
+An RSS feed is available at `/feed.rss` for readers who prefer to follow news in their feed reader. For coders who prefer a structured format, a JSON feed is also available at `/quick-news.json`.
 
 <!-- TODO: links -->
-Read the announcement post on [soubiran.dev](https://soubiran.dev) and technical details on [infra.soubiran.dev](https://infra.soubiran.dev).
+Read the announcement post on [soubiran.dev](https://soubiran.dev) and the technical details on [infra.soubiran.dev](https://infra.soubiran.dev).
 
 ## Sponsors
 
