@@ -1,5 +1,5 @@
 import { defineQueryOptions } from '@pinia/colada'
-import { postIsSubscribed } from '@/app/api'
+import { getPushNotificationPreferences, postIsSubscribed } from '@/app/api'
 
 export const PUSH_NOTIFICATIONS_QUERY_KEYS = {
   root: ['push-notifications'] as const,
@@ -22,4 +22,9 @@ export const isSubscribedQuery = defineQueryOptions(() => ({
 
     return postIsSubscribed(subscription.endpoint)
   },
+}))
+
+export const preferencesQuery = defineQueryOptions(() => ({
+  key: PUSH_NOTIFICATIONS_QUERY_KEYS.preferences(),
+  query: () => getPushNotificationPreferences(),
 }))

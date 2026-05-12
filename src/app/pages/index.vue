@@ -36,7 +36,7 @@ const { data } = useQuery(isSubscribedQuery())
 </script>
 
 <template>
-  <UContainer>
+  <UContainer class="pt-8">
     <UPage
       :ui="{
         root: 'max-w-3xl mx-auto',
