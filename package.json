@@ -39,7 +39,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^8.2.0",
     "@iconify-json/ph": "^1.2.2",
-    "@iconify-json/simple-icons": "^1.2.81",
+    "@iconify-json/simple-icons": "^1.2.82",
     "@pinia/colada-devtools": "^1.0.0",
     "@soubiran/eslint": "^0.8.4",
     "@soubiran/vite": "^0.8.4",
