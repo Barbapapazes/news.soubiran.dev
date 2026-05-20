@@ -31,7 +31,7 @@
     "pinia": "^3.0.4",
     "pinia-colada-plugin-recently-successful": "^0.1.0",
     "tailwind-variants": "^3.2.2",
-    "tailwindcss": "^4.2.4",
+    "tailwindcss": "^4.3.0",
     "vue": "^3.5.34",
     "vue-router": "^5.0.6",
     "zod": "^4.4.3"
