@@ -68,10 +68,6 @@ async function copyQuickNews(quickNews: QuickNews) {
       description: quickNews.title,
       color: 'success',
     })
-
-    track('quick_news_share_copy', {
-      id: quickNews.id,
-    })
   }
   catch {
     toast.add({
@@ -79,6 +75,17 @@ async function copyQuickNews(quickNews: QuickNews) {
       description: 'Please try again.',
       color: 'error',
     })
+
+    return
+  }
+
+  try {
+    track('quick_news_share_copy', {
+      id: quickNews.id,
+    })
+  }
+  catch {
+    // FIXME: Upstream Umami tracking should handle its own failures so copy errors stay scoped to clipboard writes.
   }
 }
 
