@@ -39,9 +39,7 @@ const props = defineProps<QuickNewsCardProps>()
 defineEmits<QuickNewsCardEmits>()
 defineSlots<QuickNewsCardSlots>()
 
-const { copy: copyToClipboard, copied } = useClipboard({
-  legacy: true,
-})
+const { copy: copyToClipboard, copied } = useClipboard()
 const { track } = useUmami()
 const toast = useToast()
 
