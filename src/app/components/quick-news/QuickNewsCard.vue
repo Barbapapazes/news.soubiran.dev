@@ -1,5 +1,6 @@
 <script lang="ts">
 import article from '~icons/ph/article-ny-times-duotone'
+import copy from '~icons/ph/copy'
 import discord from '~icons/simple-icons/discord'
 
 const quickNewsCard = tv({
@@ -38,7 +39,9 @@ const props = defineProps<QuickNewsCardProps>()
 defineEmits<QuickNewsCardEmits>()
 defineSlots<QuickNewsCardSlots>()
 
+const { copy: copyToClipboard } = useClipboard()
 const { track } = useUmami()
+const toast = useToast()
 
 function trackQuickNewsUrl(id: string) {
   track('quick_news_url', {
@@ -50,6 +53,33 @@ function trackQuickNewsDiscord(id: string) {
   track('quick_news_discord', {
     id,
   })
+}
+
+async function copyQuickNews(quickNews: QuickNews) {
+  try {
+    await copyToClipboard([
+      quickNews.title,
+      quickNews.summary,
+      quickNews.url,
+    ].join('\n\n'))
+
+    toast.add({
+      title: 'Copied for sharing',
+      description: quickNews.title,
+      color: 'success',
+    })
+
+    track('quick_news_share_copy', {
+      id: quickNews.id,
+    })
+  }
+  catch {
+    toast.add({
+      title: 'Copy failed',
+      description: 'Please try again.',
+      color: 'error',
+    })
+  }
 }
 
 const ui = computed(() => quickNewsCard())
@@ -68,6 +98,16 @@ const ui = computed(() => quickNewsCard())
       </h2>
 
       <div :class="ui.headerActions({ class: props.ui?.headerActions })">
+        <UTooltip text="Copy to share">
+          <UButton
+            aria-label="Copy to share"
+            size="sm"
+            variant="link"
+            :icon="copy"
+            :class="ui.headerActionsButton({ class: props.ui?.headerActionsButton })"
+            @click="copyQuickNews(props.quickNews)"
+          />
+        </UTooltip>
         <UTooltip text="Read the article">
           <UButton
             aria-label="Read the article"
