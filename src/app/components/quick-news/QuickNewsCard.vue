@@ -39,7 +39,7 @@ const props = defineProps<QuickNewsCardProps>()
 defineEmits<QuickNewsCardEmits>()
 defineSlots<QuickNewsCardSlots>()
 
-const { copy: copyToClipboard, copied } = useClipboard()
+const { copy: copyToClipboard } = useClipboard()
 const { track } = useUmami()
 const toast = useToast()
 
@@ -98,7 +98,7 @@ const ui = computed(() => quickNewsCard())
       </h2>
 
       <div :class="ui.headerActions({ class: props.ui?.headerActions })">
-        <UTooltip :text="copied ? 'Copied' : 'Copy to share'">
+        <UTooltip text="Copy to share">
           <UButton
             aria-label="Copy to share"
             size="sm"
