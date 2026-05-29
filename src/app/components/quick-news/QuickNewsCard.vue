@@ -58,21 +58,30 @@ function trackQuickNewsDiscord(id: string) {
 }
 
 async function copyQuickNews(quickNews: QuickNews) {
-  await copyToClipboard([
-    quickNews.title,
-    quickNews.summary,
-    quickNews.url,
-  ].join('\n\n'))
+  try {
+    await copyToClipboard([
+      quickNews.title,
+      quickNews.summary,
+      quickNews.url,
+    ].join('\n\n'))
 
-  toast.add({
-    title: 'Copied for sharing',
-    description: quickNews.title,
-    color: 'success',
-  })
+    toast.add({
+      title: 'Copied for sharing',
+      description: quickNews.title,
+      color: 'success',
+    })
 
-  track('quick_news_share_copy', {
-    id: quickNews.id,
-  })
+    track('quick_news_share_copy', {
+      id: quickNews.id,
+    })
+  }
+  catch {
+    toast.add({
+      title: 'Copy failed',
+      description: 'Please try again.',
+      color: 'error',
+    })
+  }
 }
 
 const ui = computed(() => quickNewsCard())
