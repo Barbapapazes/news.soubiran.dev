@@ -85,7 +85,7 @@ async function copyQuickNews(quickNews: QuickNews) {
     })
   }
   catch {
-    // FIXME: This should be fixed upstream instead of working around it here.
+    // FIXME: Upstream Umami tracking should handle its own failures so copy errors stay scoped to clipboard writes.
   }
 }
 
