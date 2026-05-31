@@ -40,7 +40,7 @@ useHead({
   <UApp>
     <Header :links="links" />
 
-    <UMain class="mt-8">
+    <UMain>
       <RouterView />
     </UMain>
   </UApp>

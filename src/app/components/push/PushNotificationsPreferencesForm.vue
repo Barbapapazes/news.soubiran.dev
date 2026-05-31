@@ -11,7 +11,6 @@ const pushNotificationsPreferencesForm = tv({
   slots: {
     base: 'space-y-4',
     actions: 'flex items-center justify-end gap-2',
-    recentlySuccessful: 'text-muted text-sm',
   },
 })
 
@@ -78,7 +77,11 @@ const ui = computed(() => pushNotificationsPreferencesForm())
     />
 
     <div :class="ui.actions({ class: props.ui?.actions })">
-      <span v-if="recentlySuccessful" :class="ui.recentlySuccessful({ class: props.ui?.recentlySuccessful })"> Saved. </span>
+      <RecentlySuccessful
+        v-if="recentlySuccessful"
+      >
+        Saved.
+      </RecentlySuccessful>
       <UButton type="submit" label="Save Preferences" :loading="isLoading" />
     </div>
   </UForm>

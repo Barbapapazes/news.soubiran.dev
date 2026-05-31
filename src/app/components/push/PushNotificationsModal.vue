@@ -1,8 +1,7 @@
 <script lang="ts">
 import { useQuery } from '@pinia/colada'
-import { getPushNotificationPreferences, getUser } from '@/app/api'
-import { isSubscribedQuery, PUSH_NOTIFICATIONS_QUERY_KEYS } from '@/app/queries/push-notifications'
-import { USER_QUERY_KEYS } from '@/app/queries/user'
+import { isSubscribedQuery, preferencesQuery } from '@/app/queries/push-notifications'
+import { userQuery } from '@/app/queries/user'
 
 const pushNotificationsModal = tv({
   slots: {
@@ -29,15 +28,9 @@ const title = 'Notifications'
 
 const loginUrl = `${import.meta.env.VITE_BASE_API_URL}/login`
 
-const { state: userState } = useQuery({
-  key: USER_QUERY_KEYS.root,
-  query: getUser,
-})
+const { state: userState } = useQuery(userQuery())
 
-const { state: preferencesState } = useQuery({
-  key: PUSH_NOTIFICATIONS_QUERY_KEYS.preferences(),
-  query: () => getPushNotificationPreferences(),
-})
+const { state: preferencesState } = useQuery(preferencesQuery())
 
 const loading = computed(() => {
   return userState.value.status === 'pending' || preferencesState.value.status === 'pending'
