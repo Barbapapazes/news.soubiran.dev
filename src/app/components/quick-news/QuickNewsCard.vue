@@ -1,5 +1,6 @@
 <script lang="ts">
 import article from '~icons/ph/article-ny-times-duotone'
+import copied from '~icons/ph/check'
 import copy from '~icons/ph/copy'
 import discord from '~icons/simple-icons/discord'
 
@@ -39,9 +40,8 @@ const props = defineProps<QuickNewsCardProps>()
 defineEmits<QuickNewsCardEmits>()
 defineSlots<QuickNewsCardSlots>()
 
-const { copy: copyToClipboard } = useClipboard()
+const { copy: copyToClipboard, copied: copiedToClipboard } = useClipboard()
 const { track } = useUmami()
-const toast = useToast()
 
 function trackQuickNewsUrl(id: string) {
   track('quick_news_url', {
@@ -56,37 +56,15 @@ function trackQuickNewsDiscord(id: string) {
 }
 
 async function copyQuickNews(quickNews: QuickNews) {
-  try {
-    await copyToClipboard([
-      quickNews.title,
-      quickNews.summary,
-      quickNews.url,
-    ].join('\n\n'))
+  await copyToClipboard([
+    quickNews.title,
+    quickNews.summary,
+    quickNews.url,
+  ].join('\n\n'))
 
-    toast.add({
-      title: 'Copied for sharing',
-      description: quickNews.title,
-      color: 'success',
-    })
-  }
-  catch {
-    toast.add({
-      title: 'Copy failed',
-      description: 'Please try again.',
-      color: 'error',
-    })
-
-    return
-  }
-
-  try {
-    track('quick_news_share_copy', {
-      id: quickNews.id,
-    })
-  }
-  catch {
-    // FIXME: Upstream Umami tracking should handle its own failures so copy errors stay scoped to clipboard writes.
-  }
+  track('quick_news_share_copy', {
+    id: quickNews.id,
+  })
 }
 
 const ui = computed(() => quickNewsCard())
@@ -105,12 +83,12 @@ const ui = computed(() => quickNewsCard())
       </h2>
 
       <div :class="ui.headerActions({ class: props.ui?.headerActions })">
-        <UTooltip text="Copy to share">
+        <UTooltip :text="copiedToClipboard ? 'Copied' : 'Copy to share'">
           <UButton
-            aria-label="Copy to share"
+            :aria-label="copiedToClipboard ? 'Copied' : 'Copy to share'"
             size="sm"
             variant="link"
-            :icon="copy"
+            :icon="copiedToClipboard ? copied : copy"
             :class="ui.headerActionsButton({ class: props.ui?.headerActionsButton })"
             @click="copyQuickNews(props.quickNews)"
           />
