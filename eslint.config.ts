@@ -14,4 +14,16 @@ export default antfu(
       'server-layering/services-only-in-controllers': 'error',
     },
   },
-)
+).override('antfu/pnpm/pnpm-workspace-yaml', {
+  rules: {
+    'pnpm/yaml-enforce-settings': [
+      'error',
+      {
+        settings: {
+          shellEmulator: true,
+          trustPolicy: 'off',
+        },
+      },
+    ],
+  },
+})

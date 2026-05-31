@@ -1,0 +1,2 @@
+/quick-news/:slug) /quick-news/:slug 301
+/quick-news/:slug)* /quick-news/:slug 301

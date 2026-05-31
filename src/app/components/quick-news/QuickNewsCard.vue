@@ -1,5 +1,7 @@
 <script lang="ts">
 import article from '~icons/ph/article-ny-times-duotone'
+import copied from '~icons/ph/check'
+import copy from '~icons/ph/copy'
 import discord from '~icons/simple-icons/discord'
 
 const quickNewsCard = tv({
@@ -38,6 +40,7 @@ const props = defineProps<QuickNewsCardProps>()
 defineEmits<QuickNewsCardEmits>()
 defineSlots<QuickNewsCardSlots>()
 
+const { copy: copyToClipboard, copied: copiedToClipboard } = useClipboard()
 const { track } = useUmami()
 
 function trackQuickNewsUrl(id: string) {
@@ -49,6 +52,18 @@ function trackQuickNewsUrl(id: string) {
 function trackQuickNewsDiscord(id: string) {
   track('quick_news_discord', {
     id,
+  })
+}
+
+async function copyQuickNews(quickNews: QuickNews) {
+  await copyToClipboard([
+    quickNews.title,
+    quickNews.summary,
+    quickNews.url,
+  ].join('\n\n'))
+
+  track('quick_news_share_copy', {
+    id: quickNews.id,
   })
 }
 
@@ -68,6 +83,16 @@ const ui = computed(() => quickNewsCard())
       </h2>
 
       <div :class="ui.headerActions({ class: props.ui?.headerActions })">
+        <UTooltip :text="copiedToClipboard ? 'Copied' : 'Copy to share'">
+          <UButton
+            :aria-label="copiedToClipboard ? 'Copied' : 'Copy to share'"
+            size="sm"
+            variant="link"
+            :icon="copiedToClipboard ? copied : copy"
+            :class="ui.headerActionsButton({ class: props.ui?.headerActionsButton })"
+            @click="copyQuickNews(props.quickNews)"
+          />
+        </UTooltip>
         <UTooltip text="Read the article">
           <UButton
             aria-label="Read the article"
