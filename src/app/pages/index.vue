@@ -49,14 +49,14 @@ const { data } = useQuery(isSubscribedQuery())
       <UPageBody>
         <div :class="prose.join(' ')">
           <p>
-            News is my <strong>personal technology monitoring feed</strong>, a way to keep up with the accelerating pace of the tech world. Everything I find interesting and want to track ends up here and on <a href="https://discord.gg/q2ghCGUuFR" target="_blank" rel="noopener">Discord</a>, with a summary, key bullet points, and a critical analysis.
+            News is my <strong>personal technology monitoring feed</strong>, created to help me keep pace with the accelerating world of tech. Everything I find interesting and want to track ends up here and on <a href="https://discord.gg/q2ghCGUuFR" target="_blank" rel="noopener">Discord</a>, along with a summary, key bullet points, and a critical analysis.
           </p>
           <p>
-            You can join us and <strong>share your own</strong> as well. The more news we share, the more we can learn from one another and stay up to date with the latest developments in tech.
+            You can join us and <strong>share your own</strong> news too. The more stories we share, the more we can learn from one another and stay current with the latest developments in tech.
           </p>
           <div class="flex flex-col gap-4 md:flex-row">
-            <UButton label="Share News" to="/quick-news/create" :icon="newspaper" block />
-            <UButton label="Join the Discord" href="https://discord.gg/q2ghCGUuFR" target="_blank" rel="noopener" :icon="discord" block />
+            <UButton label="Submit News" to="/quick-news/create" :icon="newspaper" block />
+            <UButton label="Join Discord" href="https://discord.gg/q2ghCGUuFR" target="_blank" rel="noopener" :icon="discord" block />
             <UButton
               block
               :label="

@@ -2,6 +2,7 @@
 import { useMutation, useQueryCache } from '@pinia/colada'
 import { prose } from '@soubiran/ui/wrapper-classes'
 import { postPushNotificationSubscription } from '@/app/api'
+import { ensurePushSubscription } from '@/app/push-subscription'
 import { PUSH_NOTIFICATIONS_QUERY_KEYS } from '@/app/queries/push-notifications'
 
 const pushNotificationsSubscriptionForm = tv({
@@ -39,11 +40,10 @@ async function enableNotifications() {
     return
   }
 
-  const registration = await navigator.serviceWorker.ready
-  const subscription = await registration.pushManager.subscribe({
-    userVisibleOnly: true,
-    applicationServerKey: decodeVapidPublicKey(import.meta.env.VITE_VAPID_PUBLIC_KEY),
-  })
+  const subscription = await ensurePushSubscription()
+  if (!subscription) {
+    return
+  }
 
   mutate({
     subscription: subscription.toJSON(),
