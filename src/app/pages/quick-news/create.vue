@@ -5,7 +5,7 @@ import z from 'zod'
 import bellRinging from '~icons/ph/bell-ringing'
 import { postPendingQuickNews } from '@/app/api'
 import PushNotificationsModal from '@/app/components/push/PushNotificationsModal.vue'
-import { LOGIN_URL } from '@/app/constants'
+import { getLoginUrl } from '@/app/constants'
 import { isSubscribedQuery, preferencesQuery } from '@/app/queries/push-notifications'
 import { userQuery } from '@/app/queries/user'
 
@@ -39,6 +39,12 @@ function onSubmit(event: FormSubmitEvent<Schema>) {
     url: event.data.url,
   })
 }
+
+const loginActions = computed(() => [{
+  label: 'Login',
+  href: getLoginUrl(),
+  target: '_blank',
+}])
 
 const { data: isSubscribedData } = useQuery(isSubscribedQuery())
 const { data: preferencesData } = useQuery(preferencesQuery())
@@ -79,13 +85,7 @@ const canManageNotifications = computed(() => userState.value.status === 'succes
       variant="subtle"
       orientation="horizontal"
       description="You must be signed in to submit a news story."
-      :actions="[
-        {
-          label: 'Login',
-          href: LOGIN_URL,
-          target: '_blank',
-        },
-      ]"
+      :actions="loginActions"
     />
 
     <UPageCard

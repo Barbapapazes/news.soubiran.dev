@@ -1,5 +1,6 @@
 <script lang="ts">
 import { useQuery } from '@pinia/colada'
+import { getLoginUrl } from '@/app/constants'
 import { isSubscribedQuery, preferencesQuery } from '@/app/queries/push-notifications'
 import { userQuery } from '@/app/queries/user'
 
@@ -26,7 +27,7 @@ defineSlots<PushNotificationsModalSlots>()
 
 const title = 'Notifications'
 
-const loginUrl = `${import.meta.env.VITE_BASE_API_URL}/login`
+const loginUrl = computed(() => getLoginUrl())
 
 const { state: userState } = useQuery(userQuery())
 
