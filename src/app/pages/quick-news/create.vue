@@ -68,6 +68,7 @@ function enableNotifications() {
 
 // Optimistic login to avoid the flickering of the alert when the user is already logged in but the user query is still in loading state
 const isLoggedIn = computed(() => userState.value.status === 'pending' || userState.value.status === 'success')
+const canManageNotifications = computed(() => userState.value.status === 'success')
 </script>
 
 <template>
@@ -115,7 +116,7 @@ const isLoggedIn = computed(() => userState.value.status === 'pending' || userSt
     </UPageCard>
 
     <UAlert
-      v-if="!successfullySubmitted"
+      v-if="canManageNotifications && successfullySubmitted"
       :icon="bellRinging"
       color="primary"
       variant="subtle"
@@ -140,7 +141,7 @@ const isLoggedIn = computed(() => userState.value.status === 'pending' || userSt
           If rejected, no action will be taken, and you can still submit other stories.
         </li>
       </ul>
-      <p>
+      <p v-if="canManageNotifications">
         You can track the status of your submission by enabling <strong class="font-semibold">Status Updates</strong> in your notification preferences.
       </p>
       <p>
