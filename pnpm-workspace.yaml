@@ -1,6 +1,5 @@
-shellEmulator: true
-
 trustPolicy: off
+shellEmulator: true
 
 allowBuilds:
   es5-ext: false
